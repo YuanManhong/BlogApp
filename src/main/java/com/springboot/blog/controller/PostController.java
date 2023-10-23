@@ -2,6 +2,7 @@ package com.springboot.blog.controller;
 
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDTO;
+import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.service.PostService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class PostController {
 
     //get all posts api
     @GetMapping()
-    public List<PostDTO> getAllPosts(
+    public PostResponse getAllPosts(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize){
         return postService.getAllPosts(pageNo, pageSize);
