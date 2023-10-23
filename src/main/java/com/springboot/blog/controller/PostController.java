@@ -2,6 +2,7 @@ package com.springboot.blog.controller;
 
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.service.PostService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,11 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostDTO> getPostById(@PathVariable(name="id") long id){
         return ResponseEntity.ok(postService.getPostByID(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO, @PathVariable(name="id") long id){
+        PostDTO postResponse = postService.updatePost(postDTO, id);
+        return new ResponseEntity<>(postResponse, HttpStatus.OK);
     }
 }
