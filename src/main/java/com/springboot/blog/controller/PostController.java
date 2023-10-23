@@ -1,5 +1,6 @@
 package com.springboot.blog.controller;
 
+import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.service.PostService;
 import jakarta.websocket.server.PathParam;
@@ -40,5 +41,11 @@ public class PostController {
     public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO postDTO, @PathVariable(name="id") long id){
         PostDTO postResponse = postService.updatePost(postDTO, id);
         return new ResponseEntity<>(postResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePost(@PathVariable(name="id") long id){
+        postService.deletePostById(id);
+        return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
     }
 }
