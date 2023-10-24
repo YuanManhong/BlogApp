@@ -1,6 +1,5 @@
 package com.springboot.blog.service;
 
-import com.springboot.blog.entity.Comment;
 import com.springboot.blog.payload.CommentDTO;
 
 import java.util.List;
