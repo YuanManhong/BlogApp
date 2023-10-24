@@ -3,12 +3,15 @@ package com.springboot.blog.payload;
 import jakarta.persistence.Column;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data // create getters and setters
 public class PostDTO { //DTO: data transfer object,
     private long id;
     private String title;
     private String description;
     private String content;
+    private Set<CommentDTO> comments;
 }
 
 /*
