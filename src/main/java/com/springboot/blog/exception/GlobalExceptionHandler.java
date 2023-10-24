@@ -35,3 +35,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
+/*
+
+Specific Exceptions: These are tailored for certain types of errors. ResourceNotFoundException and BlogAPIException are handled individually, so you can give a specific response for each error type.
+
+Global Exception: This is a catch-all for any error that doesn't match the specific ones. In your code, any other exception will be caught by the @ExceptionHandler(Exception.class) method, giving a generic error response.
+
+Specific handlers offer precise error feedback, while the global handler catches everything else, providing a safety net to ensure all errors are handled.
+ */
