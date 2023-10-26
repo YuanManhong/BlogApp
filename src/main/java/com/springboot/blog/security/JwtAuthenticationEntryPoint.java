@@ -8,6 +8,11 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
+/*
+create to handle authentication errors. if a user tries to access a secured endpoint without providing a
+valid JWT, this entry point will manage the error response
+ */
 @Component
 public class JwtAuthenticationEntryPoint  implements AuthenticationEntryPoint {
     @Override
