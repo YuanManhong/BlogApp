@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -33,8 +34,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 }
 
 /*
+CustomUserDetailsService is responsible for loading user information from a database
+or any other data source when Spring Security needs it.
+It uses the userRepository to find a user in the database
+based on the provided username or email.
+ */
+
+/*
     loadUserByUsername(...)
     It tries to find a user by their username or email.
     If it finds the user, it extracts their roles and creates a user object with their email, password, and permissions.
     If it doesn't find the user, it throws an exception saying that the user was not found with the given username or email.
  */
+
+
