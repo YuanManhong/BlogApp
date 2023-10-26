@@ -1,5 +1,6 @@
 package com.springboot.blog.controller;
 
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.payload.CategoryDTO;
 import com.springboot.blog.service.CategoryService;
 import org.apache.coyote.Response;
@@ -8,6 +9,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -30,5 +33,10 @@ public class CategoryController {
     public ResponseEntity<CategoryDTO> getCategory(@PathVariable("id") Long categoryId){
         CategoryDTO categoryDTO = categoryService.getCategory(categoryId);
         return ResponseEntity.ok(categoryDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoryDTO>> getCategories(){
+        return ResponseEntity.ok(categoryService.getAllCategories());
     }
 }
