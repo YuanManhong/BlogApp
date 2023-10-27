@@ -1,9 +1,11 @@
 package com.springboot.blog.service.impl;
 
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.PostDTO;
 import com.springboot.blog.payload.PostResponse;
+import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
 import org.modelmapper.ModelMapper;
@@ -21,19 +23,23 @@ public class PostServiceImpl implements PostService {
 
     private PostRepository postRepository;
     ModelMapper mapper;
+    private CategoryRepository categoryRepository;
 
     // @Autowired if the class has only one attribute, then it can be omitted
-    public PostServiceImpl(PostRepository postRepository, ModelMapper mapper) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper mapper,
+                           CategoryRepository categoryRepository) {
         this.postRepository = postRepository;
         this.mapper = mapper;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
     public PostDTO createPost(PostDTO postDTO){
-
+        Category category = categoryRepository.findById(postDTO.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", postDTO.getCategoryId()));
         //convert DTO to entity
         Post post = mapToEntity(postDTO);
-
+        post.setCategory(category);// you only know the categoryId in postDTO, so you need to set category again
         Post newPost = postRepository.save(post); // save into database
 
         //convert entity to DTO
