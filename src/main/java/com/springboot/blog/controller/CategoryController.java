@@ -39,4 +39,11 @@ public class CategoryController {
     public ResponseEntity<List<CategoryDTO>> getCategories(){
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("{id}")
+    public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDTO,
+                                                      @PathVariable("id") Long categoryId){
+        return ResponseEntity.ok(categoryService.updateCategory(categoryDTO, categoryId));
+    }
 }
